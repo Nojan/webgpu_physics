@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello WebGPU</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            color: #fff;
+            display: flex;
+            text-align: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+        p{
+            font-size: 14px;
+            margin:0
+        }
+    </style>
+  <script>
+  async function t(){
+	try{
+	if(!navigator.gpu)
+		throw new Error("WebGPU not supported");
+	const o = await navigator.gpu.requestAdapter();
+	if(!o)
+		throw new Error("No adapter found");
+	console.log(o),o.features.forEach(e=>{console.log(e)}),document.body.innerHTML="<h1>Hello WebGPU</h1>";
+	let r;
+	for(r in o.limits)
+		document.body.innerHTML+=`<p>${r}:${o.limits[r]}</p>`
+	}
+	catch(o){ document.body.innerHTML=`<h1>${o.message}</h1>` }
+	}
+  t();
+  </script>
+</head>
+<body>
+    
+</body>
+</html>
